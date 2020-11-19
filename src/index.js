@@ -1,13 +1,13 @@
 import "./index.css";
 
-import GameBody from "./components/gameBody.jsx";
+import Game from "./components/Main";
 import React from "react";
 import ReactDOM from "react-dom";
 import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
   <React.StrictMode>
-    <GameBody />
+    <Game />
   </React.StrictMode>,
   document.getElementById("root")
 );

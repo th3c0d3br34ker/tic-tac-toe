@@ -1,48 +1,50 @@
-// import Button from "react-bootstrap/Button";
-// import Row from "react-bootstrap/Row";
-
-import { Fragment, useEffect, useState } from "react";
-
 import GameGrid from "./gameGrid";
 import StartButton from "./buttons";
-import Winner from "./winner";
-import { calculateWinner } from "./util";
+import styled from "styled-components";
+import { useThemeValue } from "../context/themeContext";
 
-const GameBody = () => {
-  const [board, setBoard] = useState(Array(9).fill(null));
-  const [xIsNext, setXisNext] = useState(true);
+const GameContainer = styled.div`
+  background-color: ${(props) => props.backgroundColor};
+  margin: 40px;
+  padding: 20px;
+  border-radius: 25px;
+  margin-bottom: 70px;
+  position: absolute;
+  max-width: fit-content;
+  max-height: fit-content;
+`;
 
-  const winner = calculateWinner(board);
+const Heading = styled.h1`
+  text-align: center;
+  font-weight: 900;
+  font-family: Roboto;
+  color: ${(props) => props.color};
+`;
 
-  const handleClick = (i) => {
-    const boardCopy = [...board];
-    // If user click an occupied square or if game is won, return
-    if (winner || boardCopy[i]) return;
-    // Put an X or an O in the clicked square
-    boardCopy[i] = xIsNext ? "X" : "O";
-    setBoard(boardCopy);
-    setXisNext(!xIsNext);
-  };
+const TacWrapper = styled.span`
+  color: ${(props) => props.color};
+`;
 
-  useEffect(() => {
-    if (winner) {
-      console.log("Winner: ", winner);
-    }
-  }, [winner]);
+const GameBodyWrapper = styled.div`
+  background-color: ${(props) => props.backgroundColor};
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-flow: wrap;
+  font-family: sans-serif;
+  justify-content: center;
+  transition: all 0.6s ease;
+`;
 
-  const resetGame = () => {
-    console.log("called!");
-    setBoard(Array(9).fill(null));
-  };
-
+const GameBody = ({ board, xIsNext, resetGame, winner, handleClick }) => {
+  const { theme } = useThemeValue();
   return (
-    <Fragment>
-      <div className="container">
-        <h1 className="text-center">
-          <strong>
-            Tic <span className="text-white">Tac</span> Toe
-          </strong>
-        </h1>
+    <GameBodyWrapper backgroundColor={theme.backgroundColor}>
+      <GameContainer backgroundColor={theme.boadBackgroundColor}>
+        <Heading color={theme.xColor}>
+          Tic <TacWrapper color={theme.oColor}>Tac</TacWrapper> Toe
+        </Heading>
         <hr />
         <div className="text-center row justify-content-around">
           <h1 className="m-0 p-2">
@@ -53,9 +55,8 @@ const GameBody = () => {
         </div>
         <hr />
         <GameGrid board={board} onClick={handleClick} />
-      </div>
-      <Winner winner={winner} reset={resetGame} />
-    </Fragment>
+      </GameContainer>
+    </GameBodyWrapper>
   );
 };
 
