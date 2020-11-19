@@ -1,4 +1,5 @@
 const light = {
+  name: `light`,
   textColor: `black`,
   backgroundColor: `rgba(249, 200, 132, 1)`,
   gridColor: `rgba(249, 200, 132, 0.5)`,
@@ -10,6 +11,7 @@ const light = {
 };
 
 const dark = {
+  name: `dark`,
   textColor: `rgba(0, 80, 158, 1)`,
   backgroundColor: `rgba(0, 20, 40, 1)`,
   gridColor: `rgba(0, 20, 40, 0.8)`,

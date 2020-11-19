@@ -1,14 +1,37 @@
-const StartButton = ({ reset, winner }) => {
+import styled from "styled-components";
+import { useThemeValue } from "../context/themeContext";
+
+const StyledButton = styled.button`
+  background-color: ${(props) => props.backgroundColor};
+  color: ${(props) => props.color};
+  outline: none;
+  border: none;
+  border-radius: 4px;
+  margin: 8px 16px;
+  padding: 8px 16px;
+
+  &:hover,
+  &:active,
+  &:focus {
+    outline: none;
+    border: none;
+  }
+`;
+
+const ResetButton = ({ reset, winner }) => {
+  const { theme } = useThemeValue();
+
   return (
-    <button
+    <StyledButton
+      backgroundColor={theme.backgroundColor}
+      color={theme.iconColor}
       disabled={winner}
-      className="m-2 p-2"
       onClick={reset}
       variant="secondary"
     >
       RESET
-    </button>
+    </StyledButton>
   );
 };
 
-export default StartButton;
+export default ResetButton;

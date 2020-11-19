@@ -1,5 +1,5 @@
 import GameGrid from "./gameGrid";
-import StartButton from "./buttons";
+import ResetButton from "./buttons";
 import styled from "styled-components";
 import { useThemeValue } from "../context/themeContext";
 
@@ -37,6 +37,14 @@ const GameBodyWrapper = styled.div`
   transition: all 0.6s ease;
 `;
 
+const StyledLine = styled.div`
+  background-color: ${(props) => props.color};
+  margin: 0;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  height: 2px;
+`;
+
 const GameBody = ({ board, xIsNext, resetGame, winner, handleClick }) => {
   const { theme } = useThemeValue();
   return (
@@ -45,15 +53,19 @@ const GameBody = ({ board, xIsNext, resetGame, winner, handleClick }) => {
         <Heading color={theme.xColor}>
           Tic <TacWrapper color={theme.oColor}>Tac</TacWrapper> Toe
         </Heading>
-        <hr />
+
+        <StyledLine color={theme.backgroundColor} />
+
         <div className="text-center row justify-content-around">
           <h1 className="m-0 p-2">
             {winner ? null : "Next player: " + (xIsNext ? "X" : "O")}
           </h1>
 
-          <StartButton reset={resetGame} winner={winner} />
+          <ResetButton reset={resetGame} winner={winner} />
         </div>
-        <hr />
+
+        <StyledLine color={theme.backgroundColor} />
+
         <GameGrid board={board} onClick={handleClick} />
       </GameContainer>
     </GameBodyWrapper>
