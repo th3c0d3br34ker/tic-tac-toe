@@ -5,7 +5,6 @@ import GameBody from "./gameBody";
 import ThemeBar from "./themeBar";
 import Winner from "./winner";
 import { calculateWinner } from "./util";
-import styled from "styled-components";
 
 const Game = () => {
   const [board, setBoard] = useState(Array(9).fill(null));
